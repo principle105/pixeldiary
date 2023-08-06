@@ -10,8 +10,8 @@
 
 <header class="flex justify-between items-center w-[86%] mx-auto py-8">
     <a href={user ? "/dashboard" : "/"} class="flex items-center gap-4">
-        <img src={logo} alt="Pixel Diary logo" class="h-14" />
-        <span class="text-3xl font-semibold">Pixel Diary</span>
+        <img src={logo} alt="Pixel Diary logo" class="h-12 sm:h-14" />
+        <span class="text-2xl sm:text-3xl font-semibold">Pixel Diary</span>
     </a>
 
     {#if user}

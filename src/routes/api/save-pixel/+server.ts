@@ -5,11 +5,11 @@ import { ObjectId } from "mongodb";
 
 interface ReplyParams {
     cells: Cell[];
-    palette: string;
+    emotion: string;
 }
 
 export const POST: RequestHandler = async ({ request, locals }) => {
-    const { cells, palette }: ReplyParams = await request.json();
+    const { cells, emotion }: ReplyParams = await request.json();
 
     const sessionUser = (await locals.getSession())?.user as User | undefined;
 
@@ -29,8 +29,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     const pixel: Pixel = {
         id: new ObjectId().toHexString(),
         created: new Date(),
-        palette,
         cells,
+        emotion,
         public: false,
     };
 

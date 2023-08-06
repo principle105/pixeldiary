@@ -1,5 +1,4 @@
-export const GRID_HEIGHT = 11;
-export const GRID_WIDTH = 11;
+export const SIZE = 11;
 
 interface Palette {
     name: string;

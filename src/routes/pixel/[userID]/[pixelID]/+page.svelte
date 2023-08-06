@@ -17,8 +17,8 @@
         <a class="btn btn-neutral mt-6" href="/">Go To Home</a>
     </section>
 {:else}
-    <section class="flex justify-center items-center mt-6">
-        <div class="w-3/5">
+    <section class="flex justify-center items-center mt-6 lg:mt-10">
+        <div class="w-3/4 max-w-screen-md">
             <PixelDisplay
                 pixel={data.pixel}
                 userId={$page.params.userId}

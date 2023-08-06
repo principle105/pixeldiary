@@ -118,8 +118,8 @@
 
     <hr class="my-10" />
 
-    <div class="grid grid-cols-2 gap-x-20">
-        <div>
+    <div class="flex gap-12 md:gap-20 flex-col md:flex-row">
+        <div class="grow">
             <h2 class="text-2xl font-bold mb-4">Stats</h2>
 
             <div class="grid grid-cols-2 gap-4">
@@ -162,21 +162,18 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="grow">
             <h2 class="text-2xl font-bold mb-4">Your Pixels This Month</h2>
             <div class="flex flex-wrap rounded-xl">
                 {#each monthlyPixels as drawing}
                     <button
+                        class="bg-purple-300 w-10 h-10"
                         on:click={() => {
                             pixelPreview = JSON.parse(JSON.stringify(drawing));
                             isPreviewModalOpen = true;
                         }}
                     >
-                        <Grid
-                            maxHeight={6}
-                            cells={drawing.cells}
-                            editMode={false}
-                        />
+                        <Grid cells={drawing.cells} editMode={false} />
                     </button>
                 {/each}
             </div>

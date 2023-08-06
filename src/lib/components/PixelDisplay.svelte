@@ -15,7 +15,7 @@
             html2canvas(component).then((canvas) => {
                 const a = document.createElement("a");
                 a.href = canvas.toDataURL("image/png");
-                a.download = "content.png";
+                a.download = `pixel-${pixel.id}.png`;
                 a.click();
             }),
             {
@@ -43,16 +43,18 @@
     });
 </script>
 
-<div class="flex gap-7 w-full justify-between">
-    <div class="border-4 border-base-300 rounded-sm overflow-hidden">
+<div class="grid gap-7 w-full justify-between grid-cols-9">
+    <div
+        class="border-4 border-base-300 rounded-sm overflow-hidden col-span-9 sm:col-span-4"
+    >
         <div bind:this={component}>
-            <Grid maxHeight={50} cells={pixel.cells} editMode={false} />
+            <Grid cells={pixel.cells} editMode={false} />
         </div>
     </div>
-    <div class="grow">
+    <div class="col-span-9 sm:col-span-5">
         <div class="flex justify-between">
-            <h3 class="font-bold text-3xl">
-                {date}
+            <h3 class="font-bold text-3xl mb-0.5">
+                {pixel.emotion}
             </h3>
             {#if owner}
                 <label class="swap">
@@ -62,10 +64,22 @@
                 </label>
             {/if}
         </div>
-        <button class="btn btn-neutral" on:click={saveAsImage}>
+        <p class="mb-4">
+            {date}
+        </p>
+        <p class="mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic,
+            laboriosam laudantium praesentium nisi nulla culpa eligendi
+            doloremque asperiores. Dignissimos, corrupti.
+        </p>
+
+        <button class="btn btn-neutral btn-sm !text-xs" on:click={saveAsImage}>
             Download
         </button>
-        <button class="btn btn-neutral" on:click={copyShareLinkToClipboard}>
+        <button
+            class="btn btn-neutral btn-sm !text-xs"
+            on:click={copyShareLinkToClipboard}
+        >
             Copy Share Link
         </button>
     </div>

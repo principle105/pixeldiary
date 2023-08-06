@@ -2,16 +2,16 @@
     import toast from "svelte-french-toast";
     import { page } from "$app/stores";
     import type { Cell, User } from "$lib/types";
-    import { GRID_HEIGHT, GRID_WIDTH, PALETTES } from "$lib/constants";
+    import { SIZE, PALETTES } from "$lib/constants";
     import { areDatesOnSameDay } from "$lib/utils";
 
     import Grid from "$lib/components/Grid.svelte";
 
-    let chosenPalette: string[] | null = null;
+    let cbosenPaletteIndex: number | null = null;
     let currentColour: string | null = null;
 
     const initialCells: Cell[] = Array.from(
-        { length: GRID_HEIGHT * GRID_WIDTH },
+        { length: SIZE * SIZE },
         () => null
     );
 
@@ -35,7 +35,7 @@
         toast.success("Grid cleared!");
     };
 
-    const savePalette = async () => {
+    const savePixel = async () => {
         const resp = await fetch("/api/save-pixel", {
             method: "POST",
             headers: {
@@ -44,7 +44,7 @@
             body: JSON.stringify({
                 userId: user.id,
                 cells,
-                palette: chosenPalette,
+                emotion: PALETTES[cbosenPaletteIndex as number].name,
             }),
         });
 
@@ -74,36 +74,43 @@
             </div>
         </div>
     </section>
-{:else if chosenPalette === null}
-    <section class="flex items-center justify-center flex-col my-auto mt-6">
-        <h1 class="text-5xl text-center font-bold mb-3">Choose Your Emotion</h1>
-        <p class="mb-9">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ullam
-            placeat at nostrum?
-        </p>
-    </section>
-    <section class="max-w-screen-lg mx-auto">
-        <div class="grid grid-rows-2 grid-cols-4 gap-2.5">
-            {#each PALETTES as palette}
-                <button
-                    style="background: {palette.colors[1]}"
-                    class="p-8 flex justify-center items-center rounded-lg hover:brightness-90 transition-all duration-300"
-                    on:click={() => {
-                        chosenPalette = palette.colors;
-                        currentColour = chosenPalette[0];
-                    }}
-                >
-                    <div class="text-xl">
-                        <span>{palette.emoji}</span>
-                        <span class="font-semibold">{palette.name}</span>
-                    </div>
-                </button>
-            {/each}
+{:else if cbosenPaletteIndex === null}
+    <section class="w-5/6 mx-auto">
+        <div class="mt-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-3">
+                Choose Your Emotion
+            </h1>
+            <p class="mb-9">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
+                ullam placeat at nostrum?
+            </p>
+        </div>
+        <div class="max-w-screen-lg mx-auto">
+            <div class="grid sm:grid-rows-2 sm:grid-cols-4 gap-2.5">
+                {#each PALETTES as palette, i}
+                    <button
+                        style="background: {palette.colors[1]}"
+                        class="p-6 md:p-8 flex justify-center items-center rounded-lg hover:brightness-90 transition-all duration-300"
+                        on:click={() => {
+                            cbosenPaletteIndex = i;
+                            currentColour =
+                                PALETTES[cbosenPaletteIndex].colors[0];
+                        }}
+                    >
+                        <div class="text-lg md:text-xl">
+                            <span>{palette.emoji}</span>
+                            <span class="font-semibold">{palette.name}</span>
+                        </div>
+                    </button>
+                {/each}
+            </div>
         </div>
     </section>
 {:else}
-    <section class="flex items-center justify-center flex-col my-auto mt-6">
-        <h1 class="text-5xl text-center font-bold mb-3">
+    <section
+        class="flex items-center justify-center flex-col m-auto mt-6 text-center w-5/6"
+    >
+        <h1 class="text-4xl md:text-5xl font-bold mb-3">
             Draw Your Daily Pixel
         </h1>
         <p class="mb-9">
@@ -111,21 +118,27 @@
             placeat at nostrum?
         </p>
 
-        <div class="relative">
-            <Grid
-                maxHeight={60.5}
-                currentColour={currentColour || chosenPalette[0]}
-                bind:cells
-            />
+        <div class="flex md:relative flex-col sm:flex-row w-full sm:w-auto">
             <div
-                class="absolute right-0 top-1/2 translate-x-full -translate-y-1/2 pl-10"
+                class="w-full h-full sm:h-[24rem] sm:w-[24rem] md:h-[25rem] md:w-[25rem] lg:h-[30rem] lg:w-[30rem]"
             >
-                <div class="grid grid-cols-2 grid-rows-4 w-[18vmin] h-[36vmin]">
-                    {#each chosenPalette as colour}
+                <Grid
+                    currentColour={currentColour ||
+                        PALETTES[cbosenPaletteIndex].colors[0]}
+                    bind:cells
+                />
+            </div>
+            <div
+                class="md:absolute md:right-0 md:top-1/2 md:translate-x-full md:-translate-y-1/2 pt-6 sm:pl-10 sm:pt-0"
+            >
+                <div
+                    class="grid grid-rows-2 grid-cols-4 sm:grid-cols-2 sm:grid-rows-4 w-full h-full"
+                >
+                    {#each PALETTES[cbosenPaletteIndex].colors as colour}
                         <button
                             style="background: {colour}"
                             class="{colour === currentColour &&
-                                'scale-[1.15] z-10'} transition-transform duration-150 ease-linear cursor-pointer"
+                                'scale-[1.15] z-10'} transition-transform duration-150 ease-linear cursor-pointer aspect-square"
                             on:click={setColour(colour)}
                         />
                     {/each}
@@ -138,7 +151,7 @@
                     >
                         Clear
                     </button>
-                    <button class="btn btn-success" on:click={savePalette}>
+                    <button class="btn btn-success" on:click={savePixel}>
                         Save
                     </button>
                 </div>
