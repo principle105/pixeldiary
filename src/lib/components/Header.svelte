@@ -9,7 +9,7 @@
 </script>
 
 <header class="flex justify-between items-center w-[86%] mx-auto py-8">
-    <a href="/" class="flex items-center gap-4">
+    <a href={user ? "/dashboard" : "/"} class="flex items-center gap-4">
         <img src={logo} alt="Pixel Diary logo" class="h-14" />
         <span class="text-3xl font-semibold">Pixel Diary</span>
     </a>
@@ -48,6 +48,12 @@
             </div>
         </div>
     {:else}
-        <a href="/auth/signin" data-sveltekit-preload-data="off">Sign in</a>
+        <a
+            href="/auth/signin"
+            data-sveltekit-preload-data="off"
+            class="text-lg"
+        >
+            Sign in
+        </a>
     {/if}
 </header>

@@ -12,7 +12,7 @@
 
 <Header {user} />
 
-<main>
+<main class="grow">
     <slot />
 </main>
 

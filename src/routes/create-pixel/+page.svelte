@@ -44,6 +44,7 @@
             body: JSON.stringify({
                 userId: user.id,
                 cells,
+                palette: chosenPalette,
             }),
         });
 
@@ -74,7 +75,6 @@
         </div>
     </section>
 {:else if chosenPalette === null}
-    <!-- Section for choosing theme -->
     <section class="flex items-center justify-center flex-col my-auto mt-6">
         <h1 class="text-5xl text-center font-bold mb-3">Choose Your Emotion</h1>
         <p class="mb-9">
@@ -82,24 +82,25 @@
             placeat at nostrum?
         </p>
     </section>
-
-    <div class="grid grid-rows-2 grid-cols-4 max-w-screen-lg mx-auto gap-2.5">
-        {#each PALETTES as palette}
-            <button
-                style="background: {palette.colors[2]}"
-                class="p-8 flex justify-center items-center rounded-lg hover:brightness-90 transition-all duration-300"
-                on:click={() => {
-                    chosenPalette = palette.colors;
-                    currentColour = chosenPalette[0];
-                }}
-            >
-                <div class="text-xl">
-                    <span>{palette.emoji}</span>
-                    <span class="font-semibold">{palette.name}</span>
-                </div>
-            </button>
-        {/each}
-    </div>
+    <section class="max-w-screen-lg mx-auto">
+        <div class="grid grid-rows-2 grid-cols-4 gap-2.5">
+            {#each PALETTES as palette}
+                <button
+                    style="background: {palette.colors[1]}"
+                    class="p-8 flex justify-center items-center rounded-lg hover:brightness-90 transition-all duration-300"
+                    on:click={() => {
+                        chosenPalette = palette.colors;
+                        currentColour = chosenPalette[0];
+                    }}
+                >
+                    <div class="text-xl">
+                        <span>{palette.emoji}</span>
+                        <span class="font-semibold">{palette.name}</span>
+                    </div>
+                </button>
+            {/each}
+        </div>
+    </section>
 {:else}
     <section class="flex items-center justify-center flex-col my-auto mt-6">
         <h1 class="text-5xl text-center font-bold mb-3">

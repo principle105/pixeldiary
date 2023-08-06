@@ -1,18 +1,28 @@
 import clientPromise from "$lib/mongodb";
 import type { RequestHandler } from "@sveltejs/kit";
-import type { Cell, Pixel } from "$lib/types";
+import type { Cell, Pixel, User } from "$lib/types";
 import { ObjectId } from "mongodb";
 
 interface ReplyParams {
-    userId: string;
     cells: Cell[];
     palette: string;
 }
 
-export const POST: RequestHandler = async ({ request }) => {
-    const { userId, cells, palette }: ReplyParams = await request.json();
+export const POST: RequestHandler = async ({ request, locals }) => {
+    const { cells, palette }: ReplyParams = await request.json();
 
-    // TODO: do some validation here
+    const sessionUser = (await locals.getSession())?.user as User | undefined;
+
+    if (sessionUser === undefined) {
+        return new Response(
+            JSON.stringify({
+                status: 401,
+                body: "You must be logged in to save a pixel.",
+            })
+        );
+    }
+
+    const userId = sessionUser.id;
 
     const usersCollection = (await clientPromise).db().collection("users");
 
@@ -21,6 +31,7 @@ export const POST: RequestHandler = async ({ request }) => {
         created: new Date(),
         palette,
         cells,
+        public: false,
     };
 
     const today = new Date();

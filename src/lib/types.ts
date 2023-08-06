@@ -7,6 +7,7 @@ export interface Pixel {
     created: Date;
     palette: string;
     cells: Cell[];
+    public: boolean;
 }
 
 export interface User {
