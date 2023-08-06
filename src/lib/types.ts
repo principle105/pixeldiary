@@ -20,6 +20,7 @@ export interface User {
     drawings: Pixel[];
     streak: number;
     lastDrawn: Date | null;
+    createdAt: Date;
 }
 
 export interface DatabaseUser extends User {

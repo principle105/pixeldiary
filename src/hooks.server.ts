@@ -20,6 +20,7 @@ export const handle = SvelteKitAuth({
                     drawings: [],
                     streak: 0,
                     lastDrawn: null,
+                    createdAt: new Date(),
                 } satisfies User;
             },
         }),

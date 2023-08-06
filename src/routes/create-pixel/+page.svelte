@@ -1,10 +1,11 @@
 <script lang="ts">
     import toast from "svelte-french-toast";
+    import type Quill from "quill";
     import { page } from "$app/stores";
     import type { Cell, User } from "$lib/types";
     import { SIZE, PALETTES } from "$lib/constants";
     import { areDatesOnSameDay } from "$lib/utils";
-    import type Quill from "quill";
+
     import TiArrowBack from "svelte-icons/ti/TiArrowBack.svelte";
 
     import Grid from "$lib/components/Grid.svelte";
@@ -20,8 +21,8 @@
 
     let cells: Cell[] = [...initialCells];
     let isClearModalOpen = false;
-    let isPreviewModalOpen = false;
     let user = $page.data.session?.user as User;
+    let isPreviewModalOpen = false;
     let editor: Quill;
     let idea: string | null = null;
 
