@@ -6,10 +6,11 @@ import { ObjectId } from "mongodb";
 interface ReplyParams {
     cells: Cell[];
     emotion: string;
+    description: any;
 }
 
 export const POST: RequestHandler = async ({ request, locals }) => {
-    const { cells, emotion }: ReplyParams = await request.json();
+    const { cells, emotion, description }: ReplyParams = await request.json();
 
     const sessionUser = (await locals.getSession())?.user as User | undefined;
 
@@ -31,6 +32,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
         created: new Date(),
         cells,
         emotion,
+        description,
         public: false,
     };
 

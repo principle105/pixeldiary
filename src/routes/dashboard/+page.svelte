@@ -2,12 +2,14 @@
     import { page } from "$app/stores";
     import { onMount } from "svelte";
     import type { User, Pixel } from "$lib/types";
-    import wavingHand from "$lib/images/waving-hand.png";
     import { areDatesOnSameDay } from "$lib/utils";
     import html2canvas from "html2canvas";
     import toast from "svelte-french-toast";
-    import PixelDisplay from "$lib/components/PixelDisplay.svelte";
 
+    import wavingHand from "$lib/images/waving-hand.png";
+    import beginnerBadge from "$lib/images/beginner-badge.png";
+
+    import PixelDisplay from "$lib/components/PixelDisplay.svelte";
     import Grid from "$lib/components/Grid.svelte";
 
     let user = $page.data.session?.user as User;
@@ -54,7 +56,6 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userId: user.id,
                 pixelId: pixelPreview.id,
                 pixel: pixelPreview,
             }),
@@ -94,16 +95,16 @@
     </h1>
     <div class="flex items-center justify-between">
         <div class="flex items-stretch">
-            <div class="text-gray-400 text-xs my-auto">Badges</div>
+            <div class="text-gray-400 text-xs my-auto">Badges<br />Earned</div>
             <div class="h-100 border-l mx-4" />
             <div class="flex flex-nowrap gap-1">
-                <!-- {#each streakPixels.slice(0, MAX_STREAK_SHOWN) as drawing}
-                        <Grid
-                            maxHeight={4}
-                            cells={drawing.cells}
-                            editMode={false}
-                        />
-                    {/each} -->
+                <div class="tooltip" data-tip="Created an Account">
+                    <img
+                        src={beginnerBadge}
+                        alt="Beginner badge"
+                        class="h-9 w-9"
+                    />
+                </div>
             </div>
         </div>
         <a
@@ -177,6 +178,11 @@
                     </button>
                 {/each}
             </div>
+            {#if monthlyPixels.length === 0}
+                <div class="text-gray-500 text-sm mt-2">
+                    You haven't drawn any pixels this month.
+                </div>
+            {/if}
         </div>
     </div>
 </div>

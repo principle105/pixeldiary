@@ -4,6 +4,7 @@ interface Palette {
     name: string;
     emoji: string;
     colors: string[];
+    ideas: string[];
 }
 
 export const PALETTES: Palette[] = [
@@ -20,6 +21,18 @@ export const PALETTES: Palette[] = [
             "#FF7F19",
             "#FF6E00",
         ],
+        ideas: [
+            "A sun with a smiling face.",
+            "A balloon floating in the sky.",
+            "A happy emoji.",
+            "An ice cream cone.",
+            "A dancing figure.",
+            "A flower in full bloom.",
+            "A jumping dolphin.",
+            "A kite soaring high into the sky.",
+            "A smiling heart shape.",
+            "A star with rays of joy.",
+        ],
     },
     {
         name: "Calm",
@@ -33,6 +46,18 @@ export const PALETTES: Palette[] = [
             "#339033",
             "#198019",
             "#006E00",
+        ],
+        ideas: [
+            "A peaceful tree silhouette.",
+            "A serene lake or pond.",
+            "A relaxing beach scene.",
+            "A tranquil mountain.",
+            "Some gentle waves.",
+            "A candle flame.",
+            "A meditating figure.",
+            "A raindrop.",
+            "A cloud drifting by.",
+            "A zen garden arrangement.",
         ],
     },
     {
@@ -48,6 +73,17 @@ export const PALETTES: Palette[] = [
             "#1980FF",
             "#006EFF",
         ],
+        ideas: [
+            "A raindrop falling.",
+            "A drooping flower.",
+            "A frowning face emoji.",
+            "A cloud with rain.",
+            "A dimmed sun.",
+            "A lonely tree.",
+            "A closed umbrella.",
+            "A sad heart shape.",
+            "A dripping paintbrush.",
+        ],
     },
     {
         name: "Angry",
@@ -61,6 +97,16 @@ export const PALETTES: Palette[] = [
             "#FF1A1A",
             "#E60000",
             "#C70000",
+        ],
+        ideas: [
+            "A thunderbolt.",
+            "A fire emoji.",
+            "A sharp-edged lightning.",
+            "A slashed line.",
+            "An angry face.",
+            "An explosion burst.",
+            "A storm cloud.",
+            "A range of ragged mountain.",
         ],
     },
     {
@@ -76,6 +122,17 @@ export const PALETTES: Palette[] = [
             "#FFAC33",
             "#FFA019",
         ],
+        ideas: [
+            "Hands in prayer.",
+            "A grateful emoji.",
+            "A heart and smiley face.",
+            "The sun peeking through clouds.",
+            "A blooming flower.",
+            "A gift box with a bow.",
+            "A butterfly in flight.",
+            "A sparkling star.",
+            "A smiling sunflower.",
+        ],
     },
     {
         name: "Lonely",
@@ -89,6 +146,18 @@ export const PALETTES: Palette[] = [
             "#336480",
             "#1A3D66",
             "#004D4D",
+        ],
+        ideas: [
+            "A single swing hanging.",
+            "An empty park bench.",
+            "A moonlit night.",
+            "A lonely boat on a calm sea.",
+            "A dim streetlamp.",
+            "A distant lighthouse.",
+            "A silent night sky.",
+            "An isolated cabin.",
+            "A long, winding road.",
+            "A single star shining.",
         ],
     },
     {
@@ -104,6 +173,17 @@ export const PALETTES: Palette[] = [
             "#2b7760",
             "#00624d",
         ],
+        ideas: [
+            "A rising sun.",
+            "A bird in flight.",
+            "A shooting star.",
+            "A seedling sprouting.",
+            "A soaring kite.",
+            "An open door.",
+            "A beacon of light.",
+            "A floating dandelion seeds.",
+            "A crescent moon.",
+        ],
     },
     {
         name: "Creative",
@@ -117,6 +197,15 @@ export const PALETTES: Palette[] = [
             "#5633FF",
             "#3A19FF",
             "#2100FF",
+        ],
+        ideas: [
+            "A palette and paintbrush.",
+            "An easel with canvas.",
+            "A colorful swirl.",
+            "Some abstract shapes.",
+            "An artistic signature.",
+            "An imaginative cloud.",
+            "A paint splatter.",
         ],
     },
 ];

@@ -11,7 +11,7 @@
             <p class="mb-4 text-3xl tracking-tight font-bold md:text-4xl">
                 It looks like you're lost...
             </p>
-            <p class="mb-4 text-lg text-zinc-400">
+            <p class="mb-4 text-lg text-gray-400">
                 the page you are looking for does not exist.
             </p>
             <a href="/" class="btn btn-primary"> Go Back Home </a>

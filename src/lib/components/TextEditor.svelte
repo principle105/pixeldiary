@@ -11,7 +11,7 @@
 
     export let quill: Quill | null = null;
     export let content: any = null;
-    export let placeholder: string;
+    export let placeholder: string | undefined = undefined;
 
     $: content, quill?.setContents(content);
 
@@ -42,6 +42,10 @@
 
     :global(.ql-editor) {
         font-size: larger;
+    }
+
+    :global(.readonly .ql-editor) {
+        padding: 0;
     }
 
     :global(.readonly .ql-container.ql-snow) {

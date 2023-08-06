@@ -3,6 +3,7 @@
     import type { Pixel } from "$lib/types";
     import html2canvas from "html2canvas";
     import toast from "svelte-french-toast";
+    import TextEditor from "./TextEditor.svelte";
 
     export let userId: string;
     export let pixel: Pixel;
@@ -67,11 +68,10 @@
         <p class="mb-4">
             {date}
         </p>
-        <p class="mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic,
-            laboriosam laudantium praesentium nisi nulla culpa eligendi
-            doloremque asperiores. Dignissimos, corrupti.
-        </p>
+
+        <div class="mb-4">
+            <TextEditor content={pixel.description} />
+        </div>
 
         <button class="btn btn-neutral btn-sm !text-xs" on:click={saveAsImage}>
             Download
