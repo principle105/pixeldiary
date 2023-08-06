@@ -151,7 +151,7 @@
             (today.getTime() - creationDate.getTime()) / (1000 * 60 * 60 * 24)
         );
 
-        const missedDays = daysBetween - user.drawings.length;
+        const missedDays = daysBetween - user.drawings.length + 1;
 
         return missedDays;
     };
